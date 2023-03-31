@@ -33,27 +33,26 @@ export class UsersService {
   public async validateUser(username: string, pass: string) {
     const user = await this.userRepo.findOne({
       where: [{ username: username }],
-      relations: {
-        customers: true,
-        orders: { orderDetails: { product: true } },
-      },
+      // relations: {
+      //   customers: true,
+      //   orders: { orderDetails: { product: true } },
+      // },
     });
 
     const compare = await Bcrypt.compare(pass, user.password);
-
     if (compare) {
       return user;
     }
   }
   public async login(user: any) {
-    console.log(user);
-
     const payload = {
       username: user.username,
       password: user.password,
-      firstname: user.customers.firstname,
-      lastname: user.customers.lastname,
-      orderDetails: user.orders,
+      createdat: user.createdat,
+      updatedat: user.updatedat,
+      // firstname: user.customers.firstname,
+      // lastname: user.customers.lastname,
+      // orderDetails: user.orders,
     };
     return {
       access_token: this.jwtService.sign(payload),

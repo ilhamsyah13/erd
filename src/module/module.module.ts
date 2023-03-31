@@ -10,6 +10,8 @@ import { ProductCategory } from 'output/entities/ProductCategory';
 import { Users } from 'output/entities/Users';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { LocalStrategy } from 'src/auth/local.strategy';
+import { CostumersController } from 'src/costumers/costumers.controller';
+import { CostumersService } from 'src/costumers/costumers.service';
 import { ProductcategoryController } from 'src/productcategory/productcategory.controller';
 import { ProductcategoryService } from 'src/productcategory/productcategory.service';
 import { UsersController } from 'src/users/users.controller';
@@ -31,8 +33,18 @@ import { UsersService } from 'src/users/users.service';
       signOptions: { expiresIn: '2d' },
     }),
   ],
-  providers: [UsersService, LocalStrategy, JwtStrategy, ProductcategoryService],
-  controllers: [UsersController, ProductcategoryController],
+  providers: [
+    UsersService,
+    LocalStrategy,
+    JwtStrategy,
+    ProductcategoryService,
+    CostumersService,
+  ],
+  controllers: [
+    UsersController,
+    ProductcategoryController,
+    CostumersController,
+  ],
   exports: [UsersService],
 })
 export class ModuleModule {}
