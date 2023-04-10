@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Customer } from 'output/entities/Customer';
+import { Orders } from 'output/entities/Orders';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class CostumersService {
+export class OrdersService {
   constructor(
-    @InjectRepository(Customer)
-    private serviceRepo: Repository<Customer>,
+    @InjectRepository(Orders)
+    private serviceRepo: Repository<Orders>,
   ) {}
 
   public async findAll() {
-    return await this.serviceRepo.find({ relations: { user: true } });
+    return await this.serviceRepo.find({
+      relations: { user: true },
+    });
   }
 
   public async findOne(id: number) {
@@ -24,8 +26,8 @@ export class CostumersService {
   public async create(fields: any) {
     try {
       const productCategory = await this.serviceRepo.save({
-        firstname: fields.firstname,
-        lastname: fields.lastname,
+        totalproduct: fields.totalproduct,
+        totalprice: fields.totalprice,
         user: fields.user,
         createdat: new Date(),
         updatedat: new Date(),
@@ -39,8 +41,8 @@ export class CostumersService {
   public async update(id: number, fields: any) {
     try {
       const productCategory = await this.serviceRepo.update(id, {
-        firstname: fields.firstname,
-        lastname: fields.lastname,
+        totalproduct: fields.totalproduct,
+        totalprice: fields.totalprice,
         updatedat: new Date(),
       });
       return productCategory;

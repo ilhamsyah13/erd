@@ -7,11 +7,11 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CostumersService } from './costumers.service';
+import { OrderDetailService } from './order-detail.service';
 
-@Controller('costumers')
-export class CostumersController {
-  constructor(private Services: CostumersService) {}
+@Controller('orderdetail')
+export class OrderDetailController {
+  constructor(private Services: OrderDetailService) {}
   @Get()
   public async getAll() {
     return await this.Services.findAll();

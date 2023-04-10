@@ -46,6 +46,7 @@ export class UsersService {
   }
   public async login(user: any) {
     const payload = {
+      id: user.id,
       username: user.username,
       password: user.password,
       createdat: user.createdat,
